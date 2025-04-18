@@ -3,13 +3,11 @@ import React from 'react';
 import useNewsApi from '../hooks/useNewsApi';
 
 const categories = [
-  { value: 'business', label: 'Business' },
-  { value: 'entertainment', label: 'Entertainment' },
-  { value: 'general', label: 'General' },
-  { value: 'health', label: 'Health' },
-  { value: 'science', label: 'Science' },
-  { value: 'sports', label: 'Sports' },
-  { value: 'technology', label: 'Technology' },
+  { value: 'Business', label: 'Business' },
+  { value: 'Entertainment', label: 'Entertainment' },
+  { value: 'Health', label: 'Health' },
+  { value: 'Science/Tech', label: 'Science/Tech' },
+  { value: 'Sports', label: 'Sports' },
 ];
 
 const CategorySelector = () => {
