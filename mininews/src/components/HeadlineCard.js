@@ -1,45 +1,45 @@
+// HeadlineCard.js
 import { Link } from 'react-router-dom';
 import { useNewsContext } from '../contexts/NewsContext';
-import styled from 'styled-components';
 import { FaBookmark, FaRegBookmark } from 'react-icons/fa';
-
-const Card = styled.div`
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 16px;
-  margin: 10px;
-  max-width: 300px;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 4px;
-`;
-
-const Title = styled.h3`
-  font-size: 18px;
-  margin: 10px 0;
-`;
 
 const HeadlineCard = ({ article }) => {
   const { savedArticles, saveArticle, removeArticle } = useNewsContext();
   const isSaved = savedArticles.some((a) => a.url === article.url);
 
   return (
-    <Card>
-      {article.urlToImage && <Image src={article.urlToImage} alt={article.title} />}
-      <Title>
-        <Link to={`/article/${encodeURIComponent(article.url)}`}>{article.title}</Link>
-      </Title>
-      <p>{article.description}</p>
-      <button
-        onClick={() => (isSaved ? removeArticle(article.url) : saveArticle(article))}
-      >
-        {isSaved ? <FaBookmark /> : <FaRegBookmark />}
-      </button>
-    </Card>
+    <div className="bg-gray-900 border border-gray-800 rounded-lg overflow-hidden transition-shadow hover:shadow-md">
+      {article.urlToImage && (
+        <div className="h-40 overflow-hidden">
+          <img 
+            src={article.urlToImage} 
+            alt={article.title} 
+            className="w-full h-full object-cover"
+          />
+        </div>
+      )}
+      
+      <div className="p-4">
+        <h3 className="text-lg font-medium mb-2 text-white leading-tight">
+          <Link 
+            to={`/article/${encodeURIComponent(article.url)}`}
+            className="hover:text-gray-300 transition-colors"
+          >
+            {article.title}
+          </Link>
+        </h3>
+        
+        <p className="text-gray-400 text-sm mb-4 line-clamp-3">{article.description}</p>
+        
+        <button
+          onClick={() => (isSaved ? removeArticle(article.url) : saveArticle(article))}
+          className="text-gray-400 hover:text-gray-200 p-1 rounded-full transition-colors focus:outline-none"
+          aria-label={isSaved ? "Remove from bookmarks" : "Add to bookmarks"}
+        >
+          {isSaved ? <FaBookmark className="text-white" /> : <FaRegBookmark />}
+        </button>
+      </div>
+    </div>
   );
 };
 
