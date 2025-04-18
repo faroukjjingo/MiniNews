@@ -1,10 +1,11 @@
 // src/hooks/useNewsApi.js
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { NewsContext } from '../contexts/NewsContext';
 
 const useNewsApi = () => {
-  const { country, category, searchQuery } = useContext(NewsContext);
+  const [country, setCountry] = useState('us');
+  const [category, setCategory] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [headlines, setHeadlines] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -34,7 +35,7 @@ const useNewsApi = () => {
     fetchHeadlines();
   }, [country, category, searchQuery]);
 
-  return { headlines, loading, error };
+  return { headlines, loading, error, country, setCountry, category, setCategory, searchQuery, setSearchQuery };
 };
 
 export default useNewsApi;
