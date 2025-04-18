@@ -1,10 +1,20 @@
-// LoadingSpinner.js
-const LoadingSpinner = () => (
-  <div className="flex justify-center items-center py-12">
-    <div className="w-10 h-10 border-2 border-gray-700 border-t-white rounded-full animate-spin">
-      <span className="sr-only">Loading...</span>
-    </div>
-  </div>
-);
+import styled from 'styled-components';
+
+const Spinner = styled.div`
+  border: 4px solid #E5E7EB;
+  border-top: 4px solid #6B7280;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  animation: spin 1s linear infinite;
+  margin: 24px auto;
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
+
+const LoadingSpinner = () => <Spinner />;
 
 export default LoadingSpinner;
