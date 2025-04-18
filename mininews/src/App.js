@@ -11,7 +11,7 @@ import LoadingSpinner from './components/LoadingSpinner';
 import './App.css';
 
 const App = () => {
-  const { headlines, loading, error } = useNewsApi();
+  const { headlines = [], loading = false, error = null } = useNewsApi();
 
   return (
     <NewsProvider>
