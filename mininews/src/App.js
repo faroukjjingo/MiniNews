@@ -1,30 +1,24 @@
-// src/App.js
-import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { NewsProvider } from './contexts/NewsContext';
 import Navbar from './components/Navbar';
-import CountrySelector from './components/CountrySelector';
-import CategorySelector from './components/CategorySelector';
-import SearchBar from './components/SearchBar';
-import HeadlinesList from './components/HeadlinesList';
-import LoadingSpinner from './components/LoadingSpinner';
-import useNewsApi from './hooks/useNewsApi';
+import Home from './pages/Home';
+import Article from './pages/Article';
+import Saved from './pages/Saved';
 import './App.css';
 
-const App = () => {
-  const { headlines = [], loading = false, error = null } = useNewsApi();
-
+function App() {
   return (
-    <div className="app">
-      <Navbar />
-      <div className="controls">
-        <CountrySelector />
-        <CategorySelector />
-        <SearchBar />
-      </div>
-      {loading && <LoadingSpinner />}
-      {error && <p className="error">{error}</p>}
-      <HeadlinesList headlines={headlines} />
-    </div>
+    <NewsProvider>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/article/:url" element={<Article />} />
+          <Route path="/saved" element={<Saved />} />
+        </Routes>
+      </Router>
+    </NewsProvider>
   );
-};
+}
 
 export default App;
