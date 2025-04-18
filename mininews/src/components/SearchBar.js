@@ -1,17 +1,23 @@
-// src/components/SearchBar.js
-import React from 'react';
-import useNewsApi from '../hooks/useNewsApi';
+import { useNewsContext } from '../contexts/NewsContext';
+import styled from 'styled-components';
+
+const Input = styled.input`
+  padding: 10px;
+  width: 100%;
+  max-width: 300px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
 
 const SearchBar = () => {
-  const { searchQuery, setSearchQuery } = useNewsApi();
+  const { setQuery } = useNewsContext();
 
   return (
-    <input
+    <Input
       type="text"
-      value={searchQuery}
-      onChange={(e) => setSearchQuery(e.target.value)}
-      placeholder="Search headlines..."
-      className="search-bar"
+      placeholder="Search news..."
+      onChange={(e) => setQuery(e.target.value)}
     />
   );
 };
