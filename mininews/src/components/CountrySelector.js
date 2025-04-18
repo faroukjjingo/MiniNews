@@ -1,5 +1,6 @@
 // src/components/CountrySelector.js
 import React from 'react';
+import useNewsApi from '../hooks/useNewsApi';
 
 const countries = [
   { code: 'ae', name: 'United Arab Emirates' },
@@ -58,7 +59,9 @@ const countries = [
   { code: 'za', name: 'South Africa' },
 ];
 
-const CountrySelector = ({ country, setCountry }) => {
+const CountrySelector = () => {
+  const { country, setCountry } = useNewsApi();
+
   return (
     <select
       value={country}
