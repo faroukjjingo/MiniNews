@@ -1,97 +1,15 @@
-/* src/App.css */
-.app {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background: #fff;
-  color: #000;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
-.controls {
-  display: flex;
-  gap: 10px;
-  margin: 20px 0;
-  flex-wrap: wrap;
-}
-
-.country-selector,
-.category-selector {
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background: #fff;
-  color: #000;
-  appearance: none;
-}
-
-.search-bar {
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background: #fff;
-  color: #000;
-  width: 200px;
-}
-
-.headlines-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.headline-card {
-  padding: 12px;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.headline-card h3 {
+body {
+  font-family: Arial, sans-serif;
   margin: 0;
-  font-size: 16px;
-  font-weight: 600;
-  color: #000;
-  line-height: 1.4;
+  padding: 0;
+  background: #f9f9f9;
 }
 
-.source-link {
-  font-size: 14px;
-  color: #0055ff;
+a {
   text-decoration: none;
-  font-weight: 500;
+  color: #3498db;
 }
 
-.source-link:hover {
-  text-decoration: underline;
-}
-
-.error {
-  color: #000;
-  text-align: center;
-  font-size: 14px;
-  background: #f5f5f5;
-  padding: 10px;
-  border-radius: 4px;
-}
-
-.loading-spinner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px 0;
-}
-
-.spinner {
-  border: 3px solid #e0e0e0;
-  border-top: 3px solid #000;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+button {
+  cursor: pointer;
 }
