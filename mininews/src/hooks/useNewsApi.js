@@ -16,19 +16,27 @@ const useNewsApi = () => {
       setError(null);
       try {
         const params = {
-          country,
-          apiKey: process.env.REACT_APP_NEWSAPI_KEY || 'your_api_key_here', // Fallback for testing
-          ...(category && { category }),
-          ...(searchQuery && { q: searchQuery }),
+          apiKey: process.env.REACT_APP_NEWSAPI_AI_KEY,
+          lang: 'eng', // Default to English
+          ...(country && { sourceLocationUri: `http://en.wikipedia.org/wiki/${country.toUpperCase()}` }),
+          ...(category && { categoryUri: `dmoz/${category}` }),
+          ...(searchQuery && { keywords: searchQuery }),
+          maxItems: 20,
         };
         const response = await axios.get(
-          'https://newsapi.org/v2/top-headlines',
+          'http://eventregistry.org/api/v1/article/getArticles',
           { params }
         );
-        if (response.data.status === 'error') {
-          throw new Error(response.data.message);
+        if (response.data.error) {
+          throw new Error(response.data.error);
         }
-        setHeadlines(response.data.articles || []);
+        const articles = response.data.articles?.results || [];
+        setHeadlines(articles.map(article => ({
+          title: article.title,
+          source: { name: article.source?.title || 'Unknown' },
+          publishedAt: article.dateTime || new Date().toISOString(),
+          url: article.url || '#',
+        })));
       } catch (err) {
         setError(err.message || 'Failed to fetch headlines. Check your API key or network.');
         // Fallback: Mock data for default headlines
