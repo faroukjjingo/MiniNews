@@ -1,7 +1,10 @@
 // src/components/SearchBar.js
 import React from 'react';
+import useNewsApi from '../hooks/useNewsApi';
 
-const SearchBar = ({ searchQuery, setSearchQuery }) => {
+const SearchBar = () => {
+  const { searchQuery, setSearchQuery } = useNewsApi();
+
   return (
     <input
       type="text"
