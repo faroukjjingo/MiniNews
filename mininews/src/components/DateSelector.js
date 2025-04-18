@@ -1,22 +1,20 @@
+// DateSelector.js
 import { useNewsContext } from '../contexts/NewsContext';
-import styled from 'styled-components';
-
-const Input = styled.input`
-  padding: 8px;
-  margin: 10px;
-  border-radius: 4px;
-`;
 
 const DateSelector = () => {
   const { date, setDate } = useNewsContext();
 
   return (
-    <Input
-      type="date"
-      value={date.split(',')[0] || ''} // Show start date
-      onChange={(e) => setDate(e.target.value)} // Simple single-date input
-      disabled // Disabled for free plan
-    />
+    <div className="my-4">
+      <input
+        type="date"
+        value={date.split(',')[0] || ''}
+        onChange={(e) => setDate(e.target.value)}
+        disabled
+        className="w-full py-2 px-3 bg-transparent border border-gray-700 rounded-md text-sm font-medium text-gray-400 cursor-not-allowed"
+      />
+      <div className="mt-1 text-xs text-gray-500">Date selection unavailable in free plan</div>
+    </div>
   );
 };
 
