@@ -3,7 +3,7 @@ import { useNewsApi } from '../hooks/useNewsApi';
 import HeadlinesList from '../components/HeadlinesList';
 import CountrySelector from '../components/CountrySelector';
 import CategorySelector from '../components/CategorySelector';
-import SourceSelector from '../components/SourceSelector';
+import SourceSelector from '../components/SourceSelector'; // Correct import
 import LanguageSelector from '../components/LanguageSelector';
 import SortSelector from '../components/SortSelector';
 import DateSelector from '../components/DateSelector';
@@ -38,7 +38,7 @@ const Home = () => {
       <Filters>
         <CountrySelector />
         <CategorySelector />
-        <SourceSelector />
+        <SourceSelector /> {/* Correct component name */}
         <LanguageSelector />
         <SortSelector />
         <DateSelector />
