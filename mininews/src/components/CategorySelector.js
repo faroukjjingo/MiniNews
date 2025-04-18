@@ -1,14 +1,17 @@
+// src/components/CategorySelector.js
 import React from 'react';
-import { useNews } from '../contexts/NewsContext';
 
 const categories = [
-  'business', 'entertainment', 'general', 
-  'health', 'science', 'sports', 'technology'
+  { value: 'business', label: 'Business' },
+  { value: 'entertainment', label: 'Entertainment' },
+  { value: 'general', label: 'General' },
+  { value: 'health', label: 'Health' },
+  { value: 'science', label: 'Science' },
+  { value: 'sports', label: 'Sports' },
+  { value: 'technology', label: 'Technology' },
 ];
 
-const CategorySelector = () => {
-  const { category, setCategory } = useNews();
-
+const CategorySelector = ({ category, setCategory }) => {
   return (
     <select
       value={category}
@@ -16,9 +19,9 @@ const CategorySelector = () => {
       className="category-selector"
     >
       <option value="">All Categories</option>
-      {categories.map((cat) => (
-        <option key={cat} value={cat}>
-          {cat.charAt(0).toUpperCase() + cat.slice(1)}
+      {categories.map((c) => (
+        <option key={c.value} value={c.value}>
+          {c.label}
         </option>
       ))}
     </select>
