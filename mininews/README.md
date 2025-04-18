@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# README.md
+# News Headlines
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React app that fetches and displays top news headlines by country using NewsAPI. Features country and category selection, search functionality, and a responsive UI.
 
-## Available Scripts
+## Setup
 
-In the project directory, you can run:
+1. Clone the repository.
+2. Run `npm install` to install dependencies.
+3. Create a `.env` file with your NewsAPI key:
 
-### `npm start`
+REACT_APP_NEWSAPI_KEY=your_api_key_here
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+4. Run `npm start` to start the app at `http://localhost:3000`.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
 
-### `npm test`
+- Select country and category to filter headlines.
+- Search headlines by keyword.
+- Responsive design with loading and error states.
+- Context API for state management.
+- Custom hook for API fetching.
+- Optional service layer for API calls.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Dependencies
 
-### `npm run build`
+- React
+- Axios
+- NewsAPI
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Project Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+news-headlines/ ├── public/ │   ├── index.html │   ├── favicon.ico │   └── manifest.json ├── src/ │   ├── components/ │   │   ├── CountrySelector.js │   │   ├── CategorySelector.js │   │   ├── HeadlinesList.js │   │   ├── HeadlineCard.js │   │   ├── SearchBar.js │   │   ├── Navbar.js │   │   └── LoadingSpinner.js │   ├── contexts/ │   │   └── NewsContext.js │   ├── hooks/ │   │   └── useNewsApi.js │   ├── utils/ │   │   └── constants.js │   ├── services/ │   │   └── newsApi.js │   ├── assets/ │   │   ├── images/ │   │   └── styles/ │   ├── App.js │   ├── App.css │   ├── index.js │   └── index.css ├── .env ├── .env.example ├── .gitignore ├── package.json ├── README.md └── package-lock.json
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Running Tests
 
-### `npm run eject`
+- Run `npm test` to execute unit tests with Jest.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Building for Production
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Run `npm run build` to create a production build in the `build/` folder.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Contributing
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature-branch`).
+3. Commit changes (`git commit -m "Add feature"`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Open a pull request.
 
-## Learn More
+## License
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+MIT License
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
