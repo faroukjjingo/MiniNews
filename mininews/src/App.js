@@ -1,24 +1,27 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Navbar from './components/Navbar';
+import CountrySelector from './components/CountrySelector';
+import CategorySelector from './components/CategorySelector';
+import SearchBar from './components/SearchBar';
+import HeadlinesList from './components/HeadlinesList';
+import { NewsProvider } from './contexts/NewsContext';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <NewsProvider>
+      <div className="App">
+        <Navbar />
+        <main>
+          <div className="controls">
+            <CountrySelector />
+            <CategorySelector />
+            <SearchBar />
+          </div>
+          <HeadlinesList />
+        </main>
+      </div>
+    </NewsProvider>
   );
 }
 
