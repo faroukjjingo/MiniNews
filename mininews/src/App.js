@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
+import { NewsProvider } from './contexts/NewsContext';
 import Navbar from './components/Navbar';
 import CountrySelector from './components/CountrySelector';
 import CategorySelector from './components/CategorySelector';
 import SearchBar from './components/SearchBar';
 import HeadlinesList from './components/HeadlinesList';
-import { NewsProvider } from './contexts/NewsContext';
 
 function App() {
   return (
