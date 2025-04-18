@@ -23,7 +23,7 @@ const Filters = styled.div`
 
 const Home = () => {
   const { country, category, query, sources, languages, sort, date } = useNewsContext();
-  const { articles, loading, error } = useNewsApi({
+  const { articles, loading, error, page, setPage, totalResults } = useNewsApi({
     country,
     category,
     query,
@@ -43,14 +43,14 @@ const Home = () => {
         <SortSelector />
         <DateSelector />
       </Filters>
-<HeadlinesList
-  articles={articles}
-  loading={loading}
-  error={error}
-  page={page}
-  setPage={setPage}
-  totalResults={totalResults}
-/>
+      <HeadlinesList
+        articles={articles}
+        loading={loading}
+        error={error}
+        page={page}
+        setPage={setPage}
+        totalResults={totalResults}
+      />
     </Container>
   );
 };
