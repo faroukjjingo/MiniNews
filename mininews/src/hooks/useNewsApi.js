@@ -26,9 +26,12 @@ const useNewsApi = () => {
           'https://newsapi.org/v2/top-headlines',
           { params }
         );
-        setHeadlines(response.data.articles);
+        if (response.data.status === 'error') {
+          throw new Error(response.data.message);
+        }
+        setHeadlines(response.data.articles || []);
       } catch (err) {
-        setError('Failed to fetch headlines.');
+        setError(err.message || 'Failed to fetch headlines.');
       }
       setLoading(false);
     };
