@@ -1,13 +1,11 @@
 // src/contexts/NewsContext.js
-import React, { createContext, useContext, useState, useMemo } from 'react';
-import PropTypes from 'prop-types';
+import React, { createContext, useContext, useState } from 'react';
 
-// 1. Create Context
+// 1. Create the context
 const NewsContext = createContext();
 
-// 2. Create Provider Component
+// 2. Create provider component
 export const NewsProvider = ({ children }) => {
-  // State management
   const [country, setCountry] = useState('us');
   const [category, setCategory] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
@@ -15,14 +13,13 @@ export const NewsProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Toggle dark mode
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     document.body.classList.toggle('dark-mode', !darkMode);
   };
 
-  // Memoized context value
-  const contextValue = useMemo(() => ({
+  // 3. Value that will be available to consuming components
+  const value = {
     country,
     setCountry,
     category,
@@ -35,25 +32,20 @@ export const NewsProvider = ({ children }) => {
     setLoading,
     error,
     setError
-  }), [country, category, searchQuery, darkMode, loading, error]);
+  };
 
   return (
-    <NewsContext.Provider value={contextValue}>
+    <NewsContext.Provider value={value}>
       {children}
     </NewsContext.Provider>
   );
 };
 
-// 3. Create custom hook
+// 4. Create and export the useNews hook
 export const useNews = () => {
   const context = useContext(NewsContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useNews must be used within a NewsProvider');
   }
   return context;
-};
-
-// PropTypes validation
-NewsProvider.propTypes = {
-  children: PropTypes.node.isRequired
 };
