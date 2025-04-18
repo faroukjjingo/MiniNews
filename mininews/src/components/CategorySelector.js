@@ -1,31 +1,32 @@
-// src/components/CategorySelector.js
-import React from 'react';
-import useNewsApi from '../hooks/useNewsApi';
+import { useNewsContext } from '../contexts/NewsContext';
+import { CATEGORIES } from '../utils/constants';
+import styled from 'styled-components';
 
-const categories = [
-  { value: 'Business', label: 'Business' },
-  { value: 'Entertainment', label: 'Entertainment' },
-  { value: 'Health', label: 'Health' },
-  { value: 'Science/Tech', label: 'Science/Tech' },
-  { value: 'Sports', label: 'Sports' },
-];
+const Button = styled.button`
+  padding: 8px 16px;
+  margin: 5px;
+  background: ${(props) => (props.active ? '#3498db' : '#f1f1f1')};
+  color: ${(props) => (props.active ? '#fff' : '#333')};
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+`;
 
 const CategorySelector = () => {
-  const { category, setCategory } = useNewsApi();
+  const { category, setCategory } = useNewsContext();
 
   return (
-    <select
-      value={category}
-      onChange={(e) => setCategory(e.target.value)}
-      className="category-selector"
-    >
-      <option value="">All Categories</option>
-      {categories.map((c) => (
-        <option key={c.value} value={c.value}>
-          {c.label}
-        </option>
+    <div>
+      {CATEGORIES.map((cat) => (
+        <Button
+          key={cat}
+          active={category === cat}
+          onClick={() => setCategory(category === cat ? '' : cat)}
+        >
+          {cat.charAt(0).toUpperCase() + cat.slice(1)}
+        </Button>
       ))}
-    </select>
+    </div>
   );
 };
 
