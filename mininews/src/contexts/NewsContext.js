@@ -6,6 +6,10 @@ export const NewsProvider = ({ children }) => {
   const [country, setCountry] = useState('us');
   const [category, setCategory] = useState('');
   const [query, setQuery] = useState('');
+  const [sources, setSources] = useState(''); // e.g., 'cnn,-bbc'
+  const [languages, setLanguages] = useState(''); // e.g., 'en,-de'
+  const [sort, setSort] = useState('published_desc'); // Default: newest first
+  const [date, setDate] = useState(''); // e.g., '2025-04-18' or '2025-04-01,2025-04-18'
   const [savedArticles, setSavedArticles] = useState(
     JSON.parse(localStorage.getItem('savedArticles')) || []
   );
@@ -31,6 +35,14 @@ export const NewsProvider = ({ children }) => {
         setCategory,
         query,
         setQuery,
+        sources,
+        setSources,
+        languages,
+        setLanguages,
+        sort,
+        setSort,
+        date,
+        setDate,
         savedArticles,
         saveArticle,
         removeArticle,
