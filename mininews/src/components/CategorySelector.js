@@ -1,5 +1,6 @@
 // src/components/CategorySelector.js
 import React from 'react';
+import useNewsApi from '../hooks/useNewsApi';
 
 const categories = [
   { value: 'business', label: 'Business' },
@@ -11,7 +12,9 @@ const categories = [
   { value: 'technology', label: 'Technology' },
 ];
 
-const CategorySelector = ({ category, setCategory }) => {
+const CategorySelector = () => {
+  const { category, setCategory } = useNewsApi();
+
   return (
     <select
       value={category}
