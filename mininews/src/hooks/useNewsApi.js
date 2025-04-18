@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { fetchTopHeadlines, searchNews } from '../services/newsApi';
 
-export const useNewsApi = ({ country, category, query }) => {
+export const useNewsApi = ({ country, category, query, sources, languages, sort, date }) => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -14,21 +14,24 @@ export const useNewsApi = ({ country, category, query }) => {
       try {
         let data;
         if (query) {
-          data = await searchNews({ query, page });
+          data = await searchNews({ query, sources, languages, sort, date, page });
         } else {
-          data = await fetchTopHeadlines({ country, category, page });
+          data = await fetchTopHeadlines({ country, category, sources, languages, sort, date, page });
         }
-        setArticles(data.articles);
-        setTotalResults(data.totalResults);
+        console.log('Fetched Articles:', data.articles);
+        setArticles(data.articles || []);
+        setTotalResults(data.totalResults || 0);
         setError(null);
       } catch (err) {
+        console.error('useNewsApi Error:', err.message);
         setError(err.message);
+        setArticles([]);
       } finally {
         setLoading(false);
       }
     };
     fetchNews();
-  }, [country, category, query, page]);
+  }, [country, category, query, sources, languages, sort, date, page]);
 
   return { articles, loading, error, page, setPage, totalResults };
 };
