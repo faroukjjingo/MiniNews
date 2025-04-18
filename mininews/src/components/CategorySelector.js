@@ -1,30 +1,24 @@
+// CategorySelector.js
 import { useNewsContext } from '../contexts/NewsContext';
 import { CATEGORIES } from '../utils/constants';
-import styled from 'styled-components';
-
-const Button = styled.button`
-  padding: 8px 16px;
-  margin: 5px;
-  background: ${(props) => (props.active ? '#3498db' : '#f1f1f1')};
-  color: ${(props) => (props.active ? '#fff' : '#333')};
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-`;
 
 const CategorySelector = () => {
   const { category, setCategory } = useNewsContext();
 
   return (
-    <div>
+    <div className="flex flex-wrap gap-2 my-4">
       {CATEGORIES.map((cat) => (
-        <Button
+        <button
           key={cat}
-          active={category === cat}
           onClick={() => setCategory(category === cat ? '' : cat)}
+          className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+            category === cat 
+              ? 'bg-gray-700 text-white' 
+              : 'bg-gray-900 text-gray-400 border border-gray-800 hover:bg-gray-800'
+          }`}
         >
           {cat.charAt(0).toUpperCase() + cat.slice(1)}
-        </Button>
+        </button>
       ))}
     </div>
   );
