@@ -11,43 +11,47 @@ const useNewsApi = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchHeadlines = async () => {
+    const fetchHeadlines = async (retryCount = 0) => {
+      if (!country) return;
       setLoading(true);
       setError(null);
       try {
         const params = {
-          apiKey: process.env.REACT_APP_NEWSAPI_AI_KEY,
-          lang: 'eng', // Default to English
-          ...(country && { sourceLocationUri: `http://en.wikipedia.org/wiki/${country.toUpperCase()}` }),
-          ...(category && { categoryUri: `dmoz/${category}` }),
-          ...(searchQuery && { keywords: searchQuery }),
-          maxItems: 20,
+          country,
+          apiKey: process.env.REACT_APP_NEWSAPI_ORG_KEY,
+          ...(category && { category }),
+          ...(searchQuery && { q: searchQuery }),
+          pageSize: 20,
         };
         const response = await axios.get(
-          'http://eventregistry.org/api/v1/article/getArticles',
+          'https://newsapi.org/v2/top-headlines',
           { params }
         );
-        if (response.data.error) {
-          throw new Error(response.data.error);
+        if (response.data.status === 'error') {
+          throw new Error(response.data.message);
         }
-        const articles = response.data.articles?.results || [];
-        setHeadlines(articles.map(article => ({
-          title: article.title,
-          source: { name: article.source?.title || 'Unknown' },
-          publishedAt: article.dateTime || new Date().toISOString(),
-          url: article.url || '#',
-        })));
+        // Map only title, source, and URL; truncate title to 60 chars
+        setHeadlines(
+          (response.data.articles || []).map(article => ({
+            title: article.title?.substring(0, 60) + (article.title?.length > 60 ? '...' : ''),
+            source: { name: article.source?.name || 'Unknown' },
+            url: article.url || '#',
+          }))
+        );
       } catch (err) {
-        setError(err.message || 'Failed to fetch headlines. Check your API key or network.');
-        // Fallback: Mock data for default headlines
-        setHeadlines([
-          {
-            title: 'Sample Headline',
-            source: { name: 'Sample Source' },
-            publishedAt: new Date().toISOString(),
-            url: '#',
-          },
-        ]);
+        if (err.response?.status === 426 && retryCount < 2) {
+          setTimeout(() => fetchHeadlines(retryCount + 1), 1000);
+        } else {
+          setError(err.message || 'Failed to fetch headlines. Verify your API key.');
+          // Fallback: Mock data
+          setHeadlines([
+            {
+              title: 'Sample Headline',
+              source: { name: 'Sample Source' },
+              url: '#',
+            },
+          ]);
+        }
       }
       setLoading(false);
     };
