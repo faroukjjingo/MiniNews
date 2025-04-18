@@ -43,7 +43,14 @@ const Home = () => {
         <SortSelector />
         <DateSelector />
       </Filters>
-      <HeadlinesList articles={articles} loading={loading} error={error} />
+<HeadlinesList
+  articles={articles}
+  loading={loading}
+  error={error}
+  page={page}
+  setPage={setPage}
+  totalResults={totalResults}
+/>
     </Container>
   );
 };
