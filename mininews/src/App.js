@@ -22,7 +22,7 @@ const App = () => {
       </div>
       {loading && <LoadingSpinner />}
       {error && <p className="error">{error}</p>}
-      {!loading && !error && <HeadlinesList headlines={headlines} />}
+      <HeadlinesList headlines={headlines} />
     </div>
   );
 };
