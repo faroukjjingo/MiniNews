@@ -12,13 +12,12 @@ const useNewsApi = () => {
 
   useEffect(() => {
     const fetchHeadlines = async () => {
-      if (!country) return;
       setLoading(true);
       setError(null);
       try {
         const params = {
           country,
-          apiKey: process.env.REACT_APP_NEWSAPI_KEY,
+          apiKey: process.env.REACT_APP_NEWSAPI_KEY || 'your_api_key_here', // Fallback for testing
           ...(category && { category }),
           ...(searchQuery && { q: searchQuery }),
         };
@@ -31,7 +30,16 @@ const useNewsApi = () => {
         }
         setHeadlines(response.data.articles || []);
       } catch (err) {
-        setError(err.message || 'Failed to fetch headlines.');
+        setError(err.message || 'Failed to fetch headlines. Check your API key or network.');
+        // Fallback: Mock data for default headlines
+        setHeadlines([
+          {
+            title: 'Sample Headline',
+            source: { name: 'Sample Source' },
+            publishedAt: new Date().toISOString(),
+            url: '#',
+          },
+        ]);
       }
       setLoading(false);
     };
